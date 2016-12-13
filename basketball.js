@@ -58,10 +58,10 @@ function getStatus() {
             ballNotify.readValue()
                 .then(value => {
                     let results = value.getUint8(0);
-                    log('> returned data is: ' + results);
+                    console.log('> returned data is: ' + results);
                 })
                 .catch(error => {
-                    log('Argh! ' + error);
+                    console.log('Argh! ' + error);
                 });
         });
 }
