@@ -60,39 +60,10 @@ function connect() {
 
 function getStatus() {
     let data = new Uint8Array([0x7e0005186305be04107e]);
-    console.log(ballWrite);
-    console.log(ballNotify);
     return ballWrite.writeValue(data)
         .catch(err => console.log('Error when sending status packet! ', err))
 }
 
-function turnOn() {
-    let data = new Uint8Array([0xcc, 0x23, 0x33]);
-    return ledCharacteristic.writeValue(data)
-        .catch(err => console.log('Error when turning on! ', err))
-        .then(() => {
-          turnedOn = true;
-          toggleButtons();
-        });
-}
-
-function turnOff() {
-    let data = new Uint8Array([0xcc, 0x24, 0x33]);
-    return ledCharacteristic.writeValue(data)
-        .catch(err => console.log('Error when turning off! ', err))
-        .then(() => {
-          turnedOn = false;
-          toggleButtons();
-        });
-}
-
-function turnOnOff() {
-    if (turnedOn) {
-        turnOff();
-    } else {
-        turnOn();
-    }
-}
 
 function toggleButtons() {
     Array.from(document.querySelectorAll('.color-buttons button')).forEach(function(colorButton) {
@@ -101,25 +72,12 @@ function toggleButtons() {
     document.querySelector('.mic-button button').disabled = !turnedOn;
 }
 
-function setColor(red, green, blue) {
-    let data = new Uint8Array([0x56, red, green, blue, 0x00, 0xf0, 0xaa]);
-    return ledCharacteristic.writeValue(data)
-        .catch(err => console.log('Error when writing value! ', err));
-}
-
 function red() {
-    return setColor(255, 0, 0)
-        .then(() => console.log('Color set to Red'));
+    return 0;
 }
 
 function green() {
-    return setColor(0, 255, 0)
-        .then(() => console.log('Color set to Green'));
-}
-
-function blue() {
-    return setColor(0, 0, 255)
-        .then(() => console.log('Color set to Blue'));
+    return 0;
 }
 
 
