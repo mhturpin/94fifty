@@ -18,6 +18,7 @@ function connect() {
     navigator.bluetooth.requestDevice(
         {
             filters: [{ namePrefix: ['B'] }]
+            optionalServices: ['b69bc590-59d9-4920-9552-defcc31651fe']
         })
         .then(device => {
             console.log('> Found ' + device.name);
@@ -25,7 +26,7 @@ function connect() {
             return device.gatt.connect();
         })
         .then(server => {
-            console.log('Getting Service 0xb69bc59059d949209552defcc31651fe...');
+            console.log('Getting Service b69bc590-59d9-4920-9552-defcc31651fe...');
             return server.getPrimaryService('b69bc590-59d9-4920-9552-defcc31651fe');
             //b69bc590-59d9-49209552-defcc31651fe
         })
