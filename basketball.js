@@ -120,3 +120,16 @@ function blue() {
     return setColor(0, 0, 255)
         .then(() => console.log('Color set to Blue'));
 }
+
+
+/* Utils */
+
+function getSupportedProperties(characteristic) {
+    let supportedProperties = [];
+    for (const p in characteristic.properties) {
+        if (characteristic.properties[p] === true) {
+            supportedProperties.push(p.toUpperCase());
+        }
+    }
+    return '[' + supportedProperties.join(', ') + ']';
+}
