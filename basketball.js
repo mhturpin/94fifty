@@ -32,7 +32,7 @@ function connect() {
             console.log('Getting Services...');
             return server.getPrimaryServices();
         })
-        .then(services => {
+        .then(service => {
             //return service.getCharacteristic('b69bc590-59d9-4920-9552-defcc31651fe');
             return service.getCharacteristics()
         })
