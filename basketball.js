@@ -27,26 +27,26 @@ function connect() {
             return device.gatt.connect();
         })
         .then(server => {
-            //console.log('Getting Service b69bc590-59d9-4920-9552-defcc31651fe...');
-            //return server.getPrimaryService('b69bc590-59d9-4920-9552-defcc31651fe');
-            console.log('Getting Services...');
-            return server.getPrimaryServices();
+            console.log('Getting Service b69bc590-59d9-4920-9552-defcc31651fe...');
+            return server.getPrimaryService('b69bc590-59d9-4920-9552-defcc31651fe');
         })
         .then(service => {
-            //return service.getCharacteristic('b69bc590-59d9-4920-9552-defcc31651fe');
-            return service.getCharacteristics()
+            console.log('Getting Characteristics...');
+            ballWrite = service.getCharacteristic('8b00ace7-eb0b-49b0-bbe9-9aee0a26e1a3');
+            ballNotify = service.getCharacteristic('0734594a-a8e7-4b1a-a6b1-cd5243059a57');
+            console.log('All ready!');
+            onConnected();
         })
-        .then(characteristics => {
+        /*.then(characteristics => {
             characteristics.forEach(characteristic => {
                 console.log('>> Characteristic: ' + characteristic.uuid + ' ' +
                     getSupportedProperties(characteristic));
             });
             console.log('All ready!');
-            //ballService = characteristic;
             onConnected();
             // Characteristic: 8b00ace7-eb0b-49b0-bbe9-9aee0a26e1a3 [WRITEWITHOUTRESPONSE]
             // Characteristic: 0734594a-a8e7-4b1a-a6b1-cd5243059a57 [NOTIFY]
-        })
+        })*/
         .catch(error => {
             console.log('Argh! ' + error);
         });
