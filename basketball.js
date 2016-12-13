@@ -1,6 +1,8 @@
 /*
  * Based on code from
  * https://github.com/urish/web-lightbulb/blob/master/web/bulb.js
+ * and
+ * https://googlechrome.github.io/samples/web-bluetooth/
  */
 
 'use strict';
@@ -8,19 +10,22 @@
 let ballWrite = null;
 let ballNotify = null;
 
+// Bind function to text box so that it runs when enter key is pressed
 $(document).ready(function(){
     $('#data_field').keypress(function(e){
         if(e.keyCode == 13 || e.which == 13) {
-            getStatus();
+            sendData();
         }
     });
 });
 
+// Hide connect button and show text box once connected
 function onConnected() {
     document.querySelector('.connect-button').classList.add('hidden');
     document.querySelector('.user_data').classList.remove('hidden');
 }
 
+// Connect to basketball
 function connect() {
     console.log('Requesting Bluetooth Device...');
     navigator.bluetooth.requestDevice(
@@ -65,7 +70,7 @@ function connect() {
         });
 }
 
-function getStatus() {
+function sendData() {
     let val = $('#data_field').val();
     console.log('Sending status packet (' + val + ')...');
     let data = new Uint8Array([val]);
@@ -73,12 +78,7 @@ function getStatus() {
         .catch(err => console.log('Error when sending status packet! ', err))
 }
 
-
-
-/*
- * From: https://googlechrome.github.io/samples/web-bluetooth/
- */
-
+// Print notification to console if received
 function handleNotifications(event) {
     let value = event.target.value;
     console.log('> ' + value);
