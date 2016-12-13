@@ -59,6 +59,7 @@ function connect() {
 }
 
 function getStatus() {
+    console.log('Sending status packet');
     let data = new Uint8Array([0x7e0005186305be04107e]);
     return ballWrite.writeValue(data)
         .catch(err => console.log('Error when sending status packet! ', err))
