@@ -1,6 +1,10 @@
 // Code from https://github.com/urish/web-lightbulb/blob/master/web/bulb.js
 
 'use strict';
+
+let ballWrite = null;
+let ballNotify = null;
+
 $(document).ready(function(){
     $('data-field').keypress(function(e){
         if(e.keyCode == 13 || e.which == 13) {
@@ -8,10 +12,6 @@ $(document).ready(function(){
         }
     });
 });
-
-
-let ballWrite = null;
-let ballNotify = null;
 
 function onConnected() {
     document.querySelector('.connect-button').classList.add('hidden');
