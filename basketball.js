@@ -1,4 +1,7 @@
-// Code from https://github.com/urish/web-lightbulb/blob/master/web/bulb.js
+/*
+ * Based on code from
+ * https://github.com/urish/web-lightbulb/blob/master/web/bulb.js
+ */
 
 'use strict';
 
