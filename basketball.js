@@ -32,21 +32,20 @@ function connect() {
         })
         .then(service => {
             console.log('Getting Characteristics...');
-            ballWrite = service.getCharacteristic('8b00ace7-eb0b-49b0-bbe9-9aee0a26e1a3');
-            ballNotify = service.getCharacteristic('0734594a-a8e7-4b1a-a6b1-cd5243059a57');
-            console.log('All ready!');
-            onConnected();
+            return service.getCharacteristic('8b00ace7-eb0b-49b0-bbe9-9aee0a26e1a3');
+            //ballNotify = service.getCharacteristic('0734594a-a8e7-4b1a-a6b1-cd5243059a57');
         })
-        /*.then(characteristics => {
-            characteristics.forEach(characteristic => {
+        .then(characteristic => {
+            /*characteristics.forEach(characteristic => {
                 console.log('>> Characteristic: ' + characteristic.uuid + ' ' +
                     getSupportedProperties(characteristic));
-            });
+            });*/
+            ballWrite = characteristic
             console.log('All ready!');
             onConnected();
             // Characteristic: 8b00ace7-eb0b-49b0-bbe9-9aee0a26e1a3 [WRITEWITHOUTRESPONSE]
             // Characteristic: 0734594a-a8e7-4b1a-a6b1-cd5243059a57 [NOTIFY]
-        })*/
+        })
         .catch(error => {
             console.log('Argh! ' + error);
         });
