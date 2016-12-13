@@ -1,6 +1,14 @@
 // Code from https://github.com/urish/web-lightbulb/blob/master/web/bulb.js
 
 'use strict';
+$(document).ready(function(){
+    $('data-field').keypress(function(e){
+        if(e.keyCode == 13 || e.which == 13) {
+            getStatus($('data-field').val());
+        }
+    });
+});
+
 
 let ballWrite = null;
 let ballNotify = null;
@@ -54,13 +62,12 @@ function connect() {
         });
 }
 
-function getStatus() {
-    console.log('Sending status packet...');
-    let data = new Uint8Array([0x7e0005186305be04107e]);
+function getStatus(user_input) {
+    console.log('Sending status packet (' + user_input + ')...');
+    let data = new Uint8Array([user_input]);
     return ballWrite.writeValue(data)
         .catch(err => console.log('Error when sending status packet! ', err))
 }
-
 
 
 
