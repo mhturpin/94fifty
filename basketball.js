@@ -4,14 +4,10 @@
 
 let ballWrite = null;
 let ballNotify = null;
-let turnedOn = false;
 
 function onConnected() {
     document.querySelector('.connect-button').classList.add('hidden');
-    document.querySelector('.color-buttons').classList.remove('hidden');
-    document.querySelector('.mic-button').classList.remove('hidden');
-    document.querySelector('.status-button').classList.remove('hidden');
-    turnedOn = false;
+    document.querySelector('.data-field').classList.remove('hidden');
 }
 
 function connect() {
@@ -66,20 +62,6 @@ function getStatus() {
 }
 
 
-function toggleButtons() {
-    Array.from(document.querySelectorAll('.color-buttons button')).forEach(function(colorButton) {
-        colorButton.disabled = !turnedOn;
-    });
-    document.querySelector('.mic-button button').disabled = !turnedOn;
-}
-
-function red() {
-    return 0;
-}
-
-function green() {
-    return 0;
-}
 
 
 /*
