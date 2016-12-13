@@ -26,12 +26,12 @@ function connect() {
         })
         .then(server => {
             console.log('Getting Service 0xb69bc59059d949209552defcc31651fe...');
-            return server.getPrimaryService(0xb69bc59059d949209552defcc31651fe);
+            return server.getPrimaryService(0x1800);
             //b69bc590-59d9-49209552-defcc31651fe
         })
         .then(service => {
             console.log('Getting Characteristic 0xffe9 - Light control...');
-            return service.getCharacteristic(0xffe9);
+            return service.getCharacteristic(0x2A00);
         })
         .then(characteristic => {
             console.log('All ready!');
