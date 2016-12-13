@@ -25,8 +25,9 @@ function connect() {
             return device.gatt.connect();
         })
         .then(server => {
-            console.log('Getting Service 0xffe5 - Light control...');
-            return server.getPrimaryService(0xffe5);
+            console.log('Getting Service 0xb69bc59059d949209552defcc31651fe...');
+            return server.getPrimaryService(0xb69bc59059d949209552defcc31651fe);
+            //b69bc590-59d9-49209552-defcc31651fe
         })
         .then(service => {
             console.log('Getting Characteristic 0xffe9 - Light control...');
