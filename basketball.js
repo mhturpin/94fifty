@@ -31,7 +31,7 @@ function connect() {
             console.log('Getting Services...');
             return server.getPrimaryServices();
         })
-        .then(service => {
+        .then(services => {
             //return service.getCharacteristic('b69bc590-59d9-4920-9552-defcc31651fe');
             let queue = Promise.resolve();
             services.forEach(service => {
