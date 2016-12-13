@@ -2,7 +2,8 @@
 
 'use strict';
 
-let ballService = null;
+let ballWrite = null;
+let ballNotify = null;
 let turnedOn = false;
 
 function onConnected() {
@@ -33,22 +34,18 @@ function connect() {
         })
         .then(services => {
             //return service.getCharacteristic('b69bc590-59d9-4920-9552-defcc31651fe');
-            let queue = Promise.resolve();
-            services.forEach(service => {
-                queue = queue.then(_ => service.getCharacteristics().then(characteristics => {
-                    console.log('> Service: ' + service.uuid);
-                    characteristics.forEach(characteristic => {
-                        console.log('>> Characteristic: ' + characteristic.uuid + ' ' +
-                            getSupportedProperties(characteristic));
-                    });
-                }));
+            return service.getCharacteristics()
+        })
+        .then(characteristics => {
+            characteristics.forEach(characteristic => {
+                console.log('>> Characteristic: ' + characteristic.uuid + ' ' +
+                    getSupportedProperties(characteristic));
             });
-            return queue;
-        /*})
-        .then(characteristic => {
             console.log('All ready!');
-            ballService = characteristic;
+            //ballService = characteristic;
             onConnected();
+            // Characteristic: 8b00ace7-eb0b-49b0-bbe9-9aee0a26e1a3 [WRITEWITHOUTRESPONSE]
+            // Characteristic: 0734594a-a8e7-4b1a-a6b1-cd5243059a57 [NOTIFY]
         */
         })
         .catch(error => {
