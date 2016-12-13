@@ -31,8 +31,11 @@ function connect() {
             //b69bc590-59d9-49209552-defcc31651fe
         })
         .then(service => {
+            return service.getCharacteristic('b69bc590-59d9-4920-9552-defcc31651fe');
+        })
+        .then(characteristic => {
             console.log('All ready!');
-            ballService = service;
+            ballService = characteristic;
             onConnected();
         })
         .catch(error => {
