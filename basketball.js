@@ -46,7 +46,6 @@ function connect() {
             onConnected();
             // Characteristic: 8b00ace7-eb0b-49b0-bbe9-9aee0a26e1a3 [WRITEWITHOUTRESPONSE]
             // Characteristic: 0734594a-a8e7-4b1a-a6b1-cd5243059a57 [NOTIFY]
-        */
         })
         .catch(error => {
             console.log('Argh! ' + error);
