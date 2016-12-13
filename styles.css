@@ -30,7 +30,7 @@ i.material-icons {
 }
 
 .mic-button,
-.power-button {
+.status-button {
     text-align: center;
 }
 
@@ -38,7 +38,7 @@ i.material-icons {
     margin-top: 2pc;
 }
 
-.power-button {
+.status-button {
     margin-bottom: 2pc;
 }
 

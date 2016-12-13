@@ -9,7 +9,7 @@ function onConnected() {
     document.querySelector('.connect-button').classList.add('hidden');
     document.querySelector('.color-buttons').classList.remove('hidden');
     document.querySelector('.mic-button').classList.remove('hidden');
-    document.querySelector('.power-button').classList.remove('hidden');
+    document.querySelector('.status-button').classList.remove('hidden');
     turnedOn = false;
 }
 
@@ -42,7 +42,7 @@ function connect() {
 
 function getStatus() {
     return ballService.writeValue(0x7e0005186305be04107e)
-        .catch(err => console.log('Error when getting status! ', err))
+        .catch(err => console.log('Error when sending status packet! ', err))
         .then(() => {
           turnedOn = true;
           toggleButtons();

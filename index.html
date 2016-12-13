@@ -18,14 +18,15 @@
 
         <main class="mdl-layout__content">
 
-            <h3>Web Light Bulb</h3>
+            <h3>94Fifty Basketball</h3>
+            <h3>Please bounce ball at least 4 times so that it will broadcast itself.</h3>
 
             <button onclick="connect()" class="connect-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
                 <i class="material-icons">bluetooth</i> Connect
             </button>
 
-            <div class="power-button hidden">
-                <button onclick="turnOnOff()" class="mdl-button mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect">
+            <div class="status-button hidden">
+                <button onclick="getStatus()" class="mdl-button mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect">
                     <i class="material-icons">lightbulb_outline</i>
                 </button>
             </div>
@@ -52,7 +53,7 @@
             </div>
         </main>
     </div>
-    
+
     <script src="basketball.js"></script>
     </body>
 </html>
