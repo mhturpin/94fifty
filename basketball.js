@@ -53,11 +53,13 @@ function connect() {
 }
 
 function getStatus() {
+    console.log(ballWrite);
+    console.log(ballNotify);
     return ballWrite.writeValue(0x7e0005186305be04107e)
         .catch(err => console.log('Error when sending status packet! ', err))
         .then(() => {
-          turnedOn = true;
-          toggleButtons();
+            turnedOn = true;
+            toggleButtons();
         });
 }
 
