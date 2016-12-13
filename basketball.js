@@ -32,8 +32,8 @@ function connect() {
         })
         .then(service => {
             console.log('Getting Characteristics...');
+            ballNotify = service.getCharacteristic('0734594a-a8e7-4b1a-a6b1-cd5243059a57');
             return service.getCharacteristic('8b00ace7-eb0b-49b0-bbe9-9aee0a26e1a3');
-            //ballNotify = service.getCharacteristic('0734594a-a8e7-4b1a-a6b1-cd5243059a57');
         })
         .then(characteristic => {
             /*characteristics.forEach(characteristic => {
@@ -52,9 +52,10 @@ function connect() {
 }
 
 function getStatus() {
+    let data = new Uint8Array([0x7e0005186305be04107e]);
     console.log(ballWrite);
     console.log(ballNotify);
-    return ballWrite.writeValue(0x7e0005186305be04107e)
+    return ballWrite.writeValue(data)
         .catch(err => console.log('Error when sending status packet! ', err))
         .then(() => {
             turnedOn = true;
