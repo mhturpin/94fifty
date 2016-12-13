@@ -97,8 +97,3 @@ function blue() {
     return setColor(0, 0, 255)
         .then(() => console.log('Color set to Blue'));
 }
-
-// Install service worker - for offline support
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('serviceworker.js');
-}
