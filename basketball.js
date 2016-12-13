@@ -6,7 +6,7 @@ let ballWrite = null;
 let ballNotify = null;
 
 $(document).ready(function(){
-    $('data_field').keypress(function(e){
+    $('#data_field').keypress(function(e){
         if(e.keyCode == 13 || e.which == 13) {
             getStatus();
         }
@@ -63,7 +63,7 @@ function connect() {
 }
 
 function getStatus() {
-    let val = $('data_field').val();
+    let val = $('#data_field').val();
     console.log('Sending status packet (' + val + ')...');
     let data = new Uint8Array([val]);
     return ballWrite.writeValue(data)
