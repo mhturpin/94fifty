@@ -2,7 +2,7 @@
 
 'use strict';
 
-let ledCharacteristic = null;
+let ballService = null;
 let turnedOn = false;
 
 function onConnected() {
@@ -31,12 +31,8 @@ function connect() {
             //b69bc590-59d9-49209552-defcc31651fe
         })
         .then(service => {
-            console.log('Getting Characteristic 0xffe9 - Light control...');
-            return service.getCharacteristic(0x2A00);
-        })
-        .then(characteristic => {
             console.log('All ready!');
-            ledCharacteristic = characteristic;
+            ballService = service;
             onConnected();
         })
         .catch(error => {
@@ -44,39 +40,48 @@ function connect() {
         });
 }
 
-function turnOn() {
-  let data = new Uint8Array([0xcc, 0x23, 0x33]);
-  return ledCharacteristic.writeValue(data)
-      .catch(err => console.log('Error when turning on! ', err))
-      .then(() => {
+function getStatus() {
+    return ballService.writeValue(0x7e0005186305be04107e)
+        .catch(err => console.log('Error when getting status! ', err))
+        .then(() => {
           turnedOn = true;
           toggleButtons();
-      });
+        });
+}
+
+function turnOn() {
+    let data = new Uint8Array([0xcc, 0x23, 0x33]);
+    return ledCharacteristic.writeValue(data)
+        .catch(err => console.log('Error when turning on! ', err))
+        .then(() => {
+          turnedOn = true;
+          toggleButtons();
+        });
 }
 
 function turnOff() {
-  let data = new Uint8Array([0xcc, 0x24, 0x33]);
-  return ledCharacteristic.writeValue(data)
-      .catch(err => console.log('Error when turning off! ', err))
-      .then(() => {
+    let data = new Uint8Array([0xcc, 0x24, 0x33]);
+    return ledCharacteristic.writeValue(data)
+        .catch(err => console.log('Error when turning off! ', err))
+        .then(() => {
           turnedOn = false;
           toggleButtons();
-      });
+        });
 }
 
 function turnOnOff() {
-  if (turnedOn) {
-    turnOff();
-  } else {
-    turnOn();
-  }
+    if (turnedOn) {
+        turnOff();
+    } else {
+        turnOn();
+    }
 }
 
 function toggleButtons() {
-  Array.from(document.querySelectorAll('.color-buttons button')).forEach(function(colorButton) {
-    colorButton.disabled = !turnedOn;
-  });
-  document.querySelector('.mic-button button').disabled = !turnedOn;
+    Array.from(document.querySelectorAll('.color-buttons button')).forEach(function(colorButton) {
+        colorButton.disabled = !turnedOn;
+    });
+    document.querySelector('.mic-button button').disabled = !turnedOn;
 }
 
 function setColor(red, green, blue) {
