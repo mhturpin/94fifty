@@ -26,7 +26,7 @@ function connect() {
         })
         .then(server => {
             console.log('Getting Service 0xb69bc59059d949209552defcc31651fe...');
-            return server.getPrimaryService(0x1800);
+            return server.getPrimaryService('b69bc590-59d9-49209552-defcc31651fe');
             //b69bc590-59d9-49209552-defcc31651fe
         })
         .then(service => {
