@@ -6,7 +6,7 @@ let ballWrite = null;
 let ballNotify = null;
 
 $(document).ready(function(){
-    $('user_data').keypress(function(e){
+    $('data_field').keypress(function(e){
         if(e.keyCode == 13 || e.which == 13) {
             getStatus();
         }
@@ -15,7 +15,7 @@ $(document).ready(function(){
 
 function onConnected() {
     document.querySelector('.connect-button').classList.add('hidden');
-    document.querySelector('.data_field').classList.remove('hidden');
+    document.querySelector('.user_data').classList.remove('hidden');
 }
 
 function connect() {
