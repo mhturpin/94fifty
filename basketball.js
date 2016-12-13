@@ -35,11 +35,11 @@ function connect() {
             service.getCharacteristic('8b00ace7-eb0b-49b0-bbe9-9aee0a26e1a3')
             .then(characteristic => {
                 ballWrite = characteristic
-            )
+            })
             service.getCharacteristic('0734594a-a8e7-4b1a-a6b1-cd5243059a57')
             .then(characteristic => {
                 ballNotify = characteristic
-            )
+            })
             console.log('All ready!');
             onConnected();
             //return service.getCharacteristic('8b00ace7-eb0b-49b0-bbe9-9aee0a26e1a3');
