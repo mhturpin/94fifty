@@ -42,19 +42,7 @@ function connect() {
             })
             console.log('All ready!');
             onConnected();
-            //return service.getCharacteristic('8b00ace7-eb0b-49b0-bbe9-9aee0a26e1a3');
-        })/*
-        .then(characteristic => {
-            characteristics.forEach(characteristic => {
-                console.log('>> Characteristic: ' + characteristic.uuid + ' ' +
-                    getSupportedProperties(characteristic));
-            });
-            ballWrite = characteristic
-            console.log('All ready!');
-            onConnected();
-            // Characteristic: 8b00ace7-eb0b-49b0-bbe9-9aee0a26e1a3 [WRITEWITHOUTRESPONSE]
-            // Characteristic: 0734594a-a8e7-4b1a-a6b1-cd5243059a57 [NOTIFY]
-        })*/
+        })
         .catch(error => {
             console.log('Argh! ' + error);
         });
@@ -67,8 +55,14 @@ function getStatus() {
     return ballWrite.writeValue(data)
         .catch(err => console.log('Error when sending status packet! ', err))
         .then(() => {
-            turnedOn = true;
-            toggleButtons();
+            ballNotify.readValue()
+                .then(value => {
+                    let results = value.getUint8(0);
+                    log('> returned data is: ' + results);
+                })
+                .catch(error => {
+                    log('Argh! ' + error);
+                });
         });
 }
 
