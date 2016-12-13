@@ -15,7 +15,7 @@ $(document).ready(function(){
 
 function onConnected() {
     document.querySelector('.connect-button').classList.add('hidden');
-    document.querySelector('.data-field').classList.remove('hidden');
+    document.querySelector('.data_field').classList.remove('hidden');
 }
 
 function connect() {
