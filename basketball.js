@@ -26,17 +26,30 @@ function connect() {
             return device.gatt.connect();
         })
         .then(server => {
-            console.log('Getting Service b69bc590-59d9-4920-9552-defcc31651fe...');
-            return server.getPrimaryService('b69bc590-59d9-4920-9552-defcc31651fe');
-            //b69bc590-59d9-49209552-defcc31651fe
+            //console.log('Getting Service b69bc590-59d9-4920-9552-defcc31651fe...');
+            //return server.getPrimaryService('b69bc590-59d9-4920-9552-defcc31651fe');
+            console.log('Getting Services...');
+            return server.getPrimaryServices();
         })
         .then(service => {
-            return service.getCharacteristic('b69bc590-59d9-4920-9552-defcc31651fe');
-        })
+            //return service.getCharacteristic('b69bc590-59d9-4920-9552-defcc31651fe');
+            let queue = Promise.resolve();
+            services.forEach(service => {
+                queue = queue.then(_ => service.getCharacteristics().then(characteristics => {
+                    console.log('> Service: ' + service.uuid);
+                    characteristics.forEach(characteristic => {
+                        console.log('>> Characteristic: ' + characteristic.uuid + ' ' +
+                            getSupportedProperties(characteristic));
+                    });
+                }));
+            });
+            return queue;
+        /*})
         .then(characteristic => {
             console.log('All ready!');
             ballService = characteristic;
             onConnected();
+        */
         })
         .catch(error => {
             console.log('Argh! ' + error);
