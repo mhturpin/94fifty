@@ -36,6 +36,16 @@ function connect() {
             .then(characteristic => {
                 ballWrite = characteristic
             })
+                .then(() => {
+                    ballNotify.startNotifications().then(_ => {
+                            console.log('> Notifications started');
+                            ballNotify.addEventListener('characteristicvaluechanged',
+                                    handleNotifications);
+                        });
+                        .catch(error => {
+                            console.log('Argh! ' + error);
+                        });
+                });
             service.getCharacteristic('0734594a-a8e7-4b1a-a6b1-cd5243059a57')
             .then(characteristic => {
                 ballNotify = characteristic
@@ -54,16 +64,6 @@ function getStatus() {
     console.log(ballNotify);
     return ballWrite.writeValue(data)
         .catch(err => console.log('Error when sending status packet! ', err))
-        .then(() => {
-            ballNotify.readValue()
-                .then(value => {
-                    let results = value.getUint8(0);
-                    console.log('> returned data is: ' + results);
-                })
-                .catch(error => {
-                    console.log('Argh! ' + error);
-                });
-        });
 }
 
 function turnOn() {
@@ -123,7 +123,10 @@ function blue() {
 }
 
 
-/* Utils */
+/*
+ * Utils
+ * From: https://googlechrome.github.io/samples/web-bluetooth/
+ */
 
 function getSupportedProperties(characteristic) {
     let supportedProperties = [];
@@ -133,4 +136,9 @@ function getSupportedProperties(characteristic) {
         }
     }
     return '[' + supportedProperties.join(', ') + ']';
+}
+
+function handleNotifications(event) {
+    let value = event.target.value;
+    console.log('> ' + value);
 }
