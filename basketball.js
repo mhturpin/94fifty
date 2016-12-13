@@ -36,20 +36,20 @@ function connect() {
             .then(characteristic => {
                 ballWrite = characteristic
             })
+            service.getCharacteristic('0734594a-a8e7-4b1a-a6b1-cd5243059a57')
+            .then(characteristic => {
+                ballNotify = characteristic
+            })
                 .then(() => {
                     ballNotify.startNotifications().then(_ => {
                             console.log('> Notifications started');
                             ballNotify.addEventListener('characteristicvaluechanged',
                                     handleNotifications);
-                        });
+                        })
                         .catch(error => {
                             console.log('Argh! ' + error);
                         });
                 });
-            service.getCharacteristic('0734594a-a8e7-4b1a-a6b1-cd5243059a57')
-            .then(characteristic => {
-                ballNotify = characteristic
-            })
             console.log('All ready!');
             onConnected();
         })
@@ -124,19 +124,8 @@ function blue() {
 
 
 /*
- * Utils
  * From: https://googlechrome.github.io/samples/web-bluetooth/
  */
-
-function getSupportedProperties(characteristic) {
-    let supportedProperties = [];
-    for (const p in characteristic.properties) {
-        if (characteristic.properties[p] === true) {
-            supportedProperties.push(p.toUpperCase());
-        }
-    }
-    return '[' + supportedProperties.join(', ') + ']';
-}
 
 function handleNotifications(event) {
     let value = event.target.value;
