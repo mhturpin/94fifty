@@ -11,3 +11,9 @@ data, directly following TYPE).
     I left console.log() debugging output so that anyone wanting to play with
 the code will have an easier time understanding what is happening behind the
 scenes.
+
+The data_analysis folder contains a sample breakdown of the data from a packet,
+the packet capture it came from, and a command line program to help decode a
+segment of data. The segment of data must come from a packet captured during a
+dribble activity (TYPE = 0x8320). The folder also contains a table that matches
+every possible TYPE with its corresponding class.

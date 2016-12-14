@@ -1,0 +1,27 @@
+7e:83:20:00:00:00:00:00:01:00:00:00:01:00:62:05:35:00:00:01:48:00:00:07:28:00:00:07:c6:00:00:03:f6:00:00:01:5e:00:dc:00:64:00:74:01:3d:03:6c:01:f3:00:02:00:00:25:ae:77:33:7e
+|  |     |     |     |     |           |     |     |           |           |           |           |           |     |     |     |     |     |     |     |     |           |end byte
+|  |     |     |     |     |           |     |     |           |           |           |           |           |     |     |     |     |     |     |     |     |Crc32 checksum
+|  |     |     |     |     |           |     |     |           |           |           |           |           |     |     |     |     |     |     |     |short
+|  |     |     |     |     |           |     |     |           |           |           |           |           |     |     |     |     |     |     |dribbleRestartCount (number of times dribble streak has restarted)
+|  |     |     |     |     |           |     |     |           |           |           |           |           |     |     |     |     |     |dribbleIntensityActivityAverage
+|  |     |     |     |     |           |     |     |           |           |           |           |           |     |     |     |     |dribbleIntensityMovingAverage
+|  |     |     |     |     |           |     |     |           |           |           |           |           |     |     |     |averageDribbleSpeed
+|  |     |     |     |     |           |     |     |           |           |           |           |           |     |     |averageConsecutiveDribbles (divide by 10 to get actual number)
+|  |     |     |     |     |           |     |     |           |           |           |           |           |     |currentConsecutiveDribbles (divide by 10 to get actual number)
+|  |     |     |     |     |           |     |     |           |           |           |           |           |maxConsecutiveDribbles (divide by 10 to get actual number)
+|  |     |     |     |     |           |     |     |           |           |           |           |totalDribbles (divide by 10 to get actual number)
+|  |     |     |     |     |           |     |     |           |           |           |sampleCountInControl
+|  |     |     |     |     |           |     |     |           |           |sampleCountToBufferEnd
+|  |     |     |     |     |           |     |     |           |sampleCountToLastDribble
+|  |     |     |     |     |           |     |     |sampleCountToFirstDribble
+|  |     |     |     |     |           |     |short
+|  |     |     |     |     |activityId |recordId (packet number)
+|  |     |     |     |isLastNotification
+|  |     |     |?
+|  |TYPE |token
+|Start bit
+
+This is the last packet sent during a dribble activity in which I had 3 streaks:
+the first was 3, the second 22, and the third 10. The full packet capture is in
+'dribble_filtered.log', which I filtered to only contain packets involving the
+ball.
