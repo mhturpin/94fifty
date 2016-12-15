@@ -24,24 +24,6 @@ i.material-icons {
     max-width: 24px;
 }
 
-.color-buttons {
-    display: flex;
-    justify-content: space-between;
-}
-
-.mic-button,
-.status-button {
-    text-align: center;
-}
-
-.mic-button {
-    margin-top: 2pc;
-}
-
-.status-button {
-    margin-bottom: 2pc;
-}
-
 .hidden {
     display: none;
 }
