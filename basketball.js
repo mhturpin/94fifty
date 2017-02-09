@@ -44,24 +44,20 @@ function connect() {
         })
         .then(service => {
             console.log('Getting Characteristics...');
-            service.getCharacteristic('8b00ace7-eb0b-49b0-bbe9-9aee0a26e1a3')
-            .then(characteristic => {
-                ballWrite = characteristic
-            })
-            service.getCharacteristic('0734594a-a8e7-4b1a-a6b1-cd5243059a57')
-            .then(characteristic => {
-                ballNotify = characteristic
-            })
-                .then(() => {
-                    ballNotify.startNotifications().then(_ => {
-                            console.log('> Notifications started');
-                            ballNotify.addEventListener('characteristicvaluechanged',
-                                    handleNotifications);
-                        })
-                        .catch(error => {
-                            console.log('Argh! ' + error);
-                        });
-                });
+            return Promise.all([
+              service.getCharacteristic('8b00ace7-eb0b-49b0-bbe9-9aee0a26e1a3'),
+              service.getCharacteristic('0734594a-a8e7-4b1a-a6b1-cd5243059a57')  
+            ]);
+        })
+        .then(characteristics => {
+            [ballWrite, ballNotify] = characteristics;
+            return ballNotify.startNotifications().then(_ => {
+                console.log('> Notifications started');
+                ballNotify.addEventListener('characteristicvaluechanged',
+                        handleNotifications);
+            });
+        })
+        .then(() => {
             console.log('All ready!');
             onConnected();
         })
